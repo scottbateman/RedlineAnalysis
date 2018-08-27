@@ -6,11 +6,17 @@ load( 'blacklist.js' )
 
 db = db.getSiblingDB('redline')
 
+print("Resetting blacklist...")
 db.blacklist.deleteMany({})
 blacklist.forEach( item => db.blacklist.insert( {id: item} ) )
+print("Validating participants...")
 db.cumulative_entries.aggregate( pValid )
+print("Validating participants...")
 db.cumulative_entries.aggregate( tValid )
+print("Validating cumulative_entries...")
 db.cumulative_entries.aggregate( projection )
+print("Validating atomic_entries...")
+print("~~This could take a while~~")
 db.atomic_entries.aggregate( aValid )
 
 print("Validation Complete")
