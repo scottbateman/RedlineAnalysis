@@ -1,4 +1,4 @@
-[
+var projection = [
   {
     $lookup: {
       from: 'trial_validation',
@@ -26,5 +26,8 @@
       date: 0,
       mturk_id: 0
     }
+  },
+  {
+    $out: 'validated_entries'
   }
 ]

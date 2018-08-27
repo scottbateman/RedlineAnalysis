@@ -1,4 +1,4 @@
-[
+var pValid = [
   {
     $group: {
       _id: "$id",

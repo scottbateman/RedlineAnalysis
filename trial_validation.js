@@ -1,5 +1,4 @@
-
-[{
+var tValid = [{
   $lookup: {
     from: 'player_validation',
     localField: 'id',
