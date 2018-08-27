@@ -31,7 +31,7 @@ var pValid = [
   },
   {
     $project: {
-      blacklisted: 0
+      blacklist: 0
     }
   },
   {
