@@ -2,29 +2,28 @@ var pValid = [
   {
     $group: {
       _id: "$id",
-      valid: {
-        $and: [
-            { $avg: "$fps" },
-            { $expr: {
-              $gte: [ 17, $max: "$trial" ]
-            }}
-        ]
+      valid: { $push: {
+          $and: [
+              { $gte: [ { $avg: "$fps" }, 20 ] },
+              { $gte: [ 17, { $max: "$trial" } ] }
+          ]
+        }
       }
     }
   },
   {
     $lookup: {
       from: 'blacklist',
-      localField: "$id",
-      foreignField: "$id",
-      as: 'blacklisted'
+      localField: "_id",
+      foreignField: "id",
+      as: 'blacklist'
     }
   },
   {
     $addFields: {
       valid: {
         $and: [
-          { $gte: [ "$valid", 20 ] },
+          { $allElementsTrue: [ "$valid" ] },
           { $gt: [ { $size: ['$blacklist'] }, 0 ] }
         ]
       }
