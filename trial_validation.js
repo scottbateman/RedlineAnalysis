@@ -45,6 +45,8 @@ var tValid = [{
   $project: {
     id: 1,
     trial: 1,
+    set: 1,
+    level: 1,
     valid: 1
   }
 }, {

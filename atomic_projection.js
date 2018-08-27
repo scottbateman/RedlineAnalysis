@@ -1,4 +1,4 @@
-var projection = [
+var aValid = [
   {
     $lookup: {
       from: 'trial_validation',
@@ -25,8 +25,7 @@ var projection = [
   },
   {
     $addFields: {
-      valid: "$valid.valid",
-      scoreRate: { $divide: [ "$score", "$time" ] }
+      valid: "$valid.valid"
     }
   },
   {
@@ -38,6 +37,6 @@ var projection = [
     }
   },
   {
-    $out: 'trial_validation'
+    $out: 'atomic_validation'
   }
 ]
