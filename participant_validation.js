@@ -24,7 +24,7 @@ var pValid = [
       valid: {
         $and: [
           { $allElementsTrue: [ "$valid" ] },
-          { $gt: [ { $size: ['$blacklist'] }, 0 ] }
+          { $lte: [ { $size: ['$blacklist'] }, 0 ] }
         ]
       }
     }
