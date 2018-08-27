@@ -25,7 +25,8 @@ var aValid = [
   },
   {
     $addFields: {
-      valid: "$valid.valid"
+      valid: "$valid.valid",
+      type: "$valid.type"
     }
   },
   {
@@ -33,6 +34,7 @@ var aValid = [
       _id: 0,
       date: 0,
       mturk_id: 0,
+      counter: 0,
       __v: 0,
     }
   },

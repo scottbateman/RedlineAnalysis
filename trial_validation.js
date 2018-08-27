@@ -47,6 +47,7 @@ var tValid = [{
     trial: 1,
     set: 1,
     level: 1,
+    type: 1,
     valid: 1
   }
 }, {

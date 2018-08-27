@@ -5,6 +5,8 @@ load( 'atomic_projection.js' )
 
 db = db.getSiblingDB('redline')
 
+db.blacklist.deleteMany({})
+blacklist.forEach( item => db.blacklist.insert( {id: item} ) )
 db.cumulative_entries.aggregate( pValid )
 db.cumulative_entries.aggregate( tValid )
 db.cumulative_entries.aggregate( projection )
