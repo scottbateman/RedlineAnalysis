@@ -1,52 +1,21 @@
-[{
-  $lookup: {
-    from: 'player_validation',
-    localField: 'id',
-    foreignField: '_id',
-    as: 'validation'
-  }
-}, {
-  $addFields: {
-    validation: {
-      $arrayElemAt: [
-        "$validation", 0
-      ]
+[
+  {
+    $group: {
+      _id: "$id",
+      valid: {
+        $avg: "$fps"
+      }
     }
-  }
-}, {
-  $addFields: {
-    valid: {
-      $and: [{
-        $or: [{
-          $and: [{
-            $eq: [
-              "$set", 0
-            ]
-          }, {
-            $lte: [
-              "$level", 9
-            ]
-          }]
-        }, {
-          $and: [{
-            $eq: [
-              "$set", 1
-            ]
-          }, {
-            $lte: [
-              "$level", 8
-            ]
-          }]
-        }]
-      }, "$validation.valid"]
+  }, {
+    $addFields: {
+      valid: {
+        $gte: [
+          "$valid", 20
+        ]
+      }
     }
+  },
+  {
+    $out: 'player_validation'
   }
-}, {
-  $project: {
-    id: 1,
-    trial: 1,
-    valid: 1
-  }
-}, {
-  $out: 'trial_validation'
-}]
+]
