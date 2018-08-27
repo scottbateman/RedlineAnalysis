@@ -1,0 +1,16 @@
+time
+id
+trial
+level
+set
+hp
+bar
+damage
+score
+proximity
+avg_intensity_in_proximity
+active
+fps
+type
+valid
+scoreRate
