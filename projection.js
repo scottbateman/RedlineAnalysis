@@ -5,20 +5,22 @@ var projection = [
       let: { cid: "$id", ctrial: "$trial" },
       pipeline: [
         { $match: {
-          { $eq: [ "$id", "$$cid" ] },
-          { $eq: [ "$trial", "$$ctrial" ] }
+          $expr: { $and: [
+            { $eq: [ "$id", "$$cid" ] },
+            { $eq: [ "$trial", "$$ctrial" ] }
+          ]}
         } }
       ],
       as: "valid"
     }
   },
   { $addFields: {
-      valid: { $arrayElemAt: [ "$valid": 0 ] },
+      valid: { $arrayElemAt: [ "$valid", 0 ] },
       time: { $subtract: [ 60, "$counter" ] }
   },
     $addFields: {
       valid: "$valid.valid",
-      scoreRate: { $divide: [ "$score", "$time" ] }
+      scoreRate: { $divide: [ "$score", "time" ] }
     }
   },
   {
