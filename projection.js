@@ -13,11 +13,12 @@ var projection = [
     }
   },
   { $addFields: {
-      valid: { $arrayElemAt: [ "$valid": 0 ] }
+      valid: { $arrayElemAt: [ "$valid": 0 ] },
+      time: { $subtract: [ 60, "$counter" ] }
   },
     $addFields: {
       valid: "$valid.valid",
-      time: { $subtract: [ 60, "$counter" ] }
+      scoreRate: { $divide: [ "$score", "$time" ] }
     }
   },
   {
