@@ -2,6 +2,7 @@ load( 'participant_validation.js' )
 load( 'trial_validation.js' )
 load( 'projection.js' )
 load( 'atomic_projection.js' )
+load( 'blacklist.js' )
 
 db = db.getSiblingDB('redline')
 
