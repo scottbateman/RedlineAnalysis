@@ -2,13 +2,8 @@ var pValid = [
   {
     $group: {
       _id: "$id",
-      valid: { $push: {
-          $and: [
-              { $gte: [ { $avg: "$fps" }, 20 ] },
-              { $gte: [ 17, { $max: "$trial" } ] }
-          ]
-        }
-      }
+      fps: { $avg: "$fps" },
+      trialCount: { $max: "$trial" }
     }
   },
   {
@@ -23,7 +18,10 @@ var pValid = [
     $addFields: {
       valid: {
         $and: [
-          { $allElementsTrue: [ "$valid" ] },
+          { $and: [
+            { $gte: [ "$fps", 20 ] },
+            { $gte: [ "$trialCount", 17 ] }
+          ] },
           { $lte: [ { $size: ['$blacklist'] }, 0 ] }
         ]
       }
